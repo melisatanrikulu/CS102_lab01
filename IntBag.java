@@ -129,4 +129,22 @@ public class IntBag {
     
     return value;
   }
+  
+  /**
+   * Removes all instances of a given value in the collection.
+   */
+  public void removeAll( int value ) {
+	   
+	   // Searches the array for the value
+	   for ( int i = 0; i < this.size; i++ ) {
+		   // If the value is found, moves other values down
+		   if ( this.bag[i] == value ) {
+			   for ( int j = i; j < this.size - 1; j++) {
+				   this.bag[j] = this.bag[j + 1];   
+			   }
+			   this.size--;
+		   }
+	   }
+  
+  }
 }

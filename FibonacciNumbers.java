@@ -7,6 +7,8 @@
 
 public class FibonacciNumbers {
   public static void main( String[] args ) {
+	  
+	// Variables
     IntBag fibonacciNumbers = new IntBag();
     int number;
     

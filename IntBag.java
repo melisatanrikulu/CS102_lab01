@@ -42,7 +42,7 @@ public class IntBag {
   /**
    * Adds a value at a particular index location within it.
    */  
-  public void addValue(int value, int index) {
+  public boolean addValue(int value, int index) {
 	  
 	// Checks if index is within bounds
 	if ( 0 <= index && index < this.size) {
@@ -50,32 +50,43 @@ public class IntBag {
 		if ( this.size + 1 == bag.length )
 			bag = Arrays.copyOf( bag, bag.length * 2 );
     
-		// If the index is the last one, adds the value to the end of the collection 
-		if ( index == this.size ) 
-			this.addValue(value);
-
-		else {
-			// Moves other values up to make room
-			for ( int i = size; i <= index; i--)
-				this.bag[i + 1] = this.bag[i];
+		 
+		if ( index != this.size ) {
+			if ( value >= 0 ) {
+				// Moves other values up to make room
+				for ( int i = size - 1; i >= index; i--)
+					this.bag[i + 1] = this.bag[i];
     
-			this.bag[index] = value;
-			size++;
+				this.bag[index] = value;
+				size++;
+				return true;
+			}
 		}
 	}
+	
+	// If the index is the last one, adds the value to the end of the collection
+	else if ( index == this.size ) {
+		this.addValue(value);
+		return true;
+	}
+	
+	return false;
 
   }
   
   /**
    * Removes the value at a given index by placing the last element of the array into that index.
    */
-  public void removeValue( int index ) {
+  public boolean removeValue( int index ) {
 	  
   	//Checks if index is within bounds
     if ( 0 <= index && index < this.size ) {
       this.bag[index] = this.bag[this.size - 1];
       this.size--;
+      return true;
     }
+    
+    return false;
   }
   
   /**
@@ -100,10 +111,14 @@ public class IntBag {
     
     repr = "[";
     
-    for (int i = 0; i < this.size - 1; i++ )
-      repr += this.bag[i] + ", ";
+    if ( this.size > 0) {
+    	for (int i = 0; i < this.size - 1; i++ )
+    		repr += this.bag[i] + ", ";
       
-    repr += this.bag[ this.size - 1] + "]";
+    	repr += this.bag[ this.size - 1] + "]";
+    }
+    else
+    	repr += "]";
     
     return repr;
   }
@@ -133,18 +148,22 @@ public class IntBag {
   /**
    * Removes all instances of a given value in the collection.
    */
-  public void removeAll( int value ) {
+  public boolean removeAll( int value ) {
+	  boolean contains;
 	   
+	  contains = false;
 	   // Searches the array for the value
 	   for ( int i = 0; i < this.size; i++ ) {
 		   // If the value is found, moves other values down
 		   if ( this.bag[i] == value ) {
+			   contains = true;
 			   for ( int j = i; j < this.size - 1; j++) {
 				   this.bag[j] = this.bag[j + 1];   
 			   }
 			   this.size--;
 		   }
 	   }
-  
+	   
+	   return contains;
   }
 }

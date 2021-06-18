@@ -16,6 +16,7 @@ public class FibonacciNumbers {
     fibonacciNumbers.addValue(0);
     fibonacciNumbers.addValue(1);
     
+    // Adds the first 40 fibonacci numbers to IntBag
     for ( int i = 2; i < 40; i++ ) {
       // Each subsequent number is the sum of the previous two
       number = fibonacciNumbers.getValue(i - 1) + fibonacciNumbers.getValue(i - 2);

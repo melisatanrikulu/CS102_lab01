@@ -39,7 +39,7 @@ public class IntBagMenu {
 	            if ( 1 <= choice && choice <= 7 ) {
 	            	if ( choice == 1 ) {
 	            		numbers = new IntBag();
-	            		System.out.println("\nNew empty collection created\n");
+	            		System.out.println("\nNew empty collection created");
 	            	}
 	            	else if ( choice == 2 ) {
 	            		do {
@@ -52,13 +52,13 @@ public class IntBagMenu {
 	            					numbers.addValue( number );
 	            				
 	            				else if ( number < 0 )
-	            					System.out.println("\nPlease enter a positive number\n");
+	            					System.out.println("\nPlease enter a positive number");
 	            				
 	            				else
 	            					success = true;
 	            			}
 	            			else {
-	            				System.out.println("\nInvalid Choice, please enter a number\n");
+	            				System.out.println("\nInvalid Choice, please enter a number");
 	            				scan.nextLine();
 	            			}
 	            		}
@@ -66,40 +66,40 @@ public class IntBagMenu {
 	            		System.out.println();
 	            	}
 	            	else if ( choice == 3 ) {
-	            		System.out.println("\n" + numbers + "\n");	
+	            		System.out.println("\n" + numbers);	
 	            	}
-	            	// Not complete
+
 	            	// 4-Add a value to the collection of values at a specified location
 	            	else if ( choice == 4 ) {
 	            		do {
-	            			System.out.print("Enter the value: ");
+	            			System.out.print("\nEnter the value: ");
 	            			if ( scan.hasNextInt() ) {
 	            				number = scan.nextInt();
-	            				if ( number > 0 ) {
-	            					System.out.print("Enter the index: ");
-	            					if ( scan.hasNextInt() ) {
-	            						index = scan.nextInt();
-	            						success = numbers.addValue(number, index);
-	            						
-	            						if ( success )
-	            							System.out.println("Value added successfully");
-	            						
-	            						else 
-	            							System.out.println("Invalid choice. Please enter a valid index");
-	            						
-	            					}
+	            				System.out.print("Enter the index: ");
+	            				if ( scan.hasNextInt() ) {
+	            					index = scan.nextInt();
+	            					success = numbers.addValue(number, index);
+	            					
+	            					if ( success )
+	            						System.out.println("\nValue added successfully");
+	            							
 	            					else {
-	            						System.out.println("Invalid choice. Please enter an integer");
-	    	            				scan.nextLine();
-	    	            				scan.nextLine();
+	            						System.out.println("\nInvalid choice(s). Please make sure to enter a valid index and a valid value");
+	            						System.out.println("Valid value interval: [0, (infinity))");
+	            						if ( numbers.size() != 0 )
+	            							System.out.println("Valid index interval: [0, " + numbers.size() + ")");
+	            						else
+	            							System.out.println("Valid index interval: [0,0]");
 	            					}
 	            				}
-	            				else
-	            					System.out.println("Invalid choice. Please enter a positive integer");
-	            				
+	            				else {
+	            					System.out.println("\nInvalid choice. Please enter an integer");
+	            					scan.nextLine();
+	            					scan.nextLine();
+	            				}
 	            			}
 	            			else {
-	            				System.out.println("Invalid choice. Please enter an integer");
+	            				System.out.println("\nInvalid choice. Please enter an integer");
 	            				scan.nextLine();
 	            				scan.nextLine();
 	            			}
@@ -118,19 +118,19 @@ public class IntBagMenu {
 	            					scan.nextLine();
 	            					success = numbers.removeValue(index);
 	            					if ( success )
-	            						System.out.println("Removed successfully\n");
+	            						System.out.println("\nRemoved successfully");
 	            					else 
-	            						System.out.println("Invalid choice. Please enter a valid index" );
+	            						System.out.println("\nInvalid choice. Please enter a valid index" );
 	            				}
 	            				else {
-	            					System.out.println("Invalid choice");
+	            					System.out.println("\nInvalid choice. Please enter an integer");
 	            					scan.nextLine();
 	            				}
 	            			}
 	            			while( !success );
 	            		}
 	            		else
-	            			System.out.println("The collection does not contain any value\n");
+	            			System.out.println("\nThe collection does not contain any value");
 	            	}
 	            	
 	            	// 6
@@ -143,14 +143,14 @@ public class IntBagMenu {
 	            				scan.nextLine();
 	            				success = numbers.removeAll(number);
 	            				if ( success )
-	            					System.out.println("Removed successfully\n");
+	            					System.out.println("\nRemoved successfully");
 	            				else {
-	            					System.out.println("Collection does not include " + number + "\n");
+	            					System.out.println("\nCollection does not include " + number);
 	            					success = true;
 	            				}
 	            			}
 	            			else {
-	            				System.out.println("Invalid choice");
+	            				System.out.println("\nInvalid choice");
 	            				scan.nextLine();
 	            			}
 	            		}
@@ -160,12 +160,12 @@ public class IntBagMenu {
 	            }
 	            // If choice is not in [1, 7],  print a corresponding message
 	            else {
-	            	System.out.println("Invalid Choice");
+	            	System.out.println("\nInvalid Choice");
 	            }
 			}	
 			// If choice is not an integer,  print a corresponding message
 			else {
-				System.out.println("\nInvalid Choice, Please enter an integer\n");
+				System.out.println("\nInvalid Choice, Please enter an integer");
 				scan.nextLine();
 			}
 		

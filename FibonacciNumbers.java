@@ -1,8 +1,8 @@
 /**
  * Computes and displays the first 40 fibonacci numbers.
  * @author Melisa Tanrýkulu
- * @version 1
- * 15.06.2021
+ * @version 2
+ * 18.06.2021
  */
 
 public class FibonacciNumbers {
@@ -25,6 +25,7 @@ public class FibonacciNumbers {
     }
     
     // Displays the first 40 fibonacci numbers
+    System.out.println("First 40 Fibonacci Numbers:");
     System.out.println(fibonacciNumbers);
   }
 }

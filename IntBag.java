@@ -9,9 +9,7 @@ import java.util.Arrays;
 
 public class IntBag {
   // Instance Data Members
-  int[] bag;
-  int size;
-   
+  private int[] bag;
   // Constructor
   
   /**
@@ -19,70 +17,65 @@ public class IntBag {
    */
   public IntBag() {
     bag = new int[4];
-    size = 0;
   }
 
   /**
    * Adds a value to the end of the collection.
    */  
-  public void addValue( int value ) {
-	  // Doubles the size of the array if needed
-    if ( this.size + 1 == bag.length )
-      bag = Arrays.copyOf( bag, bag.length * 2 );
+  public boolean addValue( int value ) {
+	int size = this.size();
+	
+	if ( value >= 0) {
+		// Doubles the size of the array if needed
+		if ( size + 1 == bag.length )
+			bag = Arrays.copyOf( bag, bag.length * 2 );
     
-    // Adds the number and increments the size if the number is nonnegative
-    if ( value >= 0 ) {
-      bag[size] = value;
-      size++;
-    }
-    else
-      bag[size] = value;
+		// Adds the number and increments the size if the number is nonnegative
+		bag[size] = value;
+		bag[size + 1] = -1;
+		return true;
+	}
+	else
+		return false;
   }
   
   /**
    * Adds a value at a particular index location within it.
    */  
   public boolean addValue(int value, int index) {
+	  int size = this.size();
 	  
-	// Checks if index is within bounds
-	if ( 0 <= index && index < this.size) {
-		// Doubles the size of the array if needed
-		if ( this.size + 1 == bag.length )
-			bag = Arrays.copyOf( bag, bag.length * 2 );
-    
-		 
-		if ( index != this.size ) {
-			if ( value >= 0 ) {
-				// Moves other values up to make room
-				for ( int i = size - 1; i >= index; i--)
-					this.bag[i + 1] = this.bag[i];
-    
-				this.bag[index] = value;
-				size++;
-				return true;
-			}
-		}
-	}
-	
-	// If the index is the last one, adds the value to the end of the collection
-	else if ( index == this.size ) {
-		this.addValue(value);
-		return true;
-	}
-	
-	return false;
+	  if ( value >= 0 ) { 
+		  if ( 0 <= index && index <= size ) {
+			  // Doubles the size of the array if needed
+			  if ( size + 1 == bag.length )
+				  bag = Arrays.copyOf( bag, bag.length * 2 );
+		    
+			  for ( int i = size ; i >= index; i--)
+				  this.bag[i + 1] = this.bag[i];
 
+			  this.bag[index] = value;
+			  
+		  
+			  if ( size == 0 ) 
+				  this.bag[1] = -1;
+			  return true;
+		  }
+	  }
+	  return false;
   }
   
   /**
    * Removes the value at a given index by placing the last element of the array into that index.
    */
   public boolean removeValue( int index ) {
+	  int size = this.size();
 	  
   	//Checks if index is within bounds
-    if ( 0 <= index && index < this.size ) {
-      this.bag[index] = this.bag[this.size - 1];
-      this.size--;
+    if ( 0 <= index && index < size ) {
+      this.bag[index] = this.bag[size - 1];
+      this.bag[size - 1] = -1;
+      this.bag[size] = 0;
       return true;
     }
     
@@ -94,7 +87,9 @@ public class IntBag {
    * @return true if contains
    */
   public boolean contains( int value ) {
-    for ( int i = 0; i < this.size; i++ ) {
+	  int size = this.size();
+	  
+    for ( int i = 0; i < size; i++ ) {
       if ( this.bag[i] == value )
         return true;
     }
@@ -108,14 +103,15 @@ public class IntBag {
    */
   public String toString() {
     String repr;
+    int size = this.size();
     
     repr = "[";
     
-    if ( this.size > 0) {
-    	for (int i = 0; i < this.size - 1; i++ )
+    if ( size > 0) {
+    	for (int i = 0; i < size - 1; i++ )
     		repr += this.bag[i] + ", ";
       
-    	repr += this.bag[ this.size - 1] + "]";
+    	repr += this.bag[ size - 1] + "]";
     }
     else
     	repr += "]";
@@ -128,7 +124,15 @@ public class IntBag {
    * @return the size
    */
   public int size() {
-    return this.size;
+	  int size = 0;
+	  
+	  for ( int i = 0; i < this.bag.length; i++ ) {
+		  if ( this.bag[i] < 0 )
+			  return size;
+		  size++;
+	  }
+	  
+	  return 0;
   }
   
   /**
@@ -137,9 +141,10 @@ public class IntBag {
   public int getValue( int index ) {
     // Returns -1 if there is no value at location 'index'
     int value = -1;
+    int size = this.size();
     
     //Checks if index is within bounds
-    if ( 0 <= index && index < this.size ) 
+    if ( 0 <= index && index < size ) 
       value = this.bag[ index ];
     
     return value;
@@ -150,17 +155,17 @@ public class IntBag {
    */
   public boolean removeAll( int value ) {
 	  boolean contains;
+	  int size = this.size();
 	   
 	  contains = false;
 	   // Searches the array for the value
-	   for ( int i = 0; i < this.size; i++ ) {
+	   for ( int i = 0; i < size; i++ ) {
 		   // If the value is found, moves other values down
 		   if ( this.bag[i] == value ) {
 			   contains = true;
-			   for ( int j = i; j < this.size - 1; j++) {
+			   for ( int j = i; j < size - 1; j++) {
 				   this.bag[j] = this.bag[j + 1];   
 			   }
-			   this.size--;
 		   }
 	   }
 	   

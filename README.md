@@ -1,0 +1,25 @@
+# CS102_lab01
+Lab 01
+
+This lab is very simple and intended to get you back into the swing of Java programming and practice some Version Control concepts.
+
+Recall that the number of elements an array has must be specified when you create it and cannot be changed later. However, in many situations, it is impossible to know in advance how many elements will actually be needed. In such cases, the only solution is to allocate an array large enough to handle the worst-case scenario and then use a subset of its elements as needed. There are various ways to specify the subset, the most common of which is to store data values sequentially from the beginning of the array and to maintain a count of the number of such data values, thus making it easy to ensure that only those elements that contain valid data are processed. The following exercises ask you to use a slightly different technique to create a class that can hold a varying number of integer values and to use this to solve a number of simple problems.
+
+Part a (15 points). Install Git in your local pc. You can follow the instructions for installation here. Signup to GitHub and optionally get an Education pack with your student id card. Create a private repository using your own account which is called CS102_lab01. Double-check that your repository is actually private because if it's not and someone copies your lab homework, you will get into trouble because of the plagiarism. Now you need to initialize your repository in your local project's folder. To do that and to refresh what was covered in the tutorial, go here. For parts b, c and d once you are done with the part, add everything you have coded so far to the staging area, then commit the changes with the message "Part {b, c or d} is done". After you committed the code, push them to your private repository. Go to your GitHub account and open the CS102_lab01 and check whether the code is updated in the repository, or check whether the latest commit that shows there is the one you have just made. If you needed to change something in one of the parts after you already committed and pushed everything, just add everything again, commit with the message that explains the changes you made and push the changes to the remote CS102_lab01 repository.
+
+Part b (35 points). Design and implement a class, IntBag, that allows a variable-sized collection of non-negative integer values to be stored. Your class should have a single property, an int array called bag that will hold the values of the collection. The values themselves must be stored contiguously starting from the beginning of the array. The last value is followed by a negative (sentinel) value. The class should have one constructor which creates an empty collection (with room for up to 4 values). Provide methods to add a value to the end of the collection and to add a value at a particular index location i within it (moving other values "up" to make room, after checking i is within bounds). If there is no room for another value, the array should expand so that its size is doubled. Also, write methods to remove the value at a given index (placing the last element of the array into that index) and another to test whether the collection contains a given value or not. Provide a toString method that returns a String representation of the collection, a method, size, that returns the number of values currently in the collection, and finally, a method that will allow you to get the value at location i within the collection.
+
+Part c (25 points). Design & implement a program to efficiently compute & display the first 40 Fibonacci numbers by making use of the fact that the first two Fibonacci numbers are 0 and 1, and each subsequent number is the sum of the previous two. Use an instance of your IntBag class to keep a collection of Fibonacci numbers found so far. Initially, it should contain only the numbers 0 and 1. Generate and add the rest of the Fibonacci numbers into your IntBag instance.
+
+Part d (25 points). Add a method, removeAll, to your IntBag class which removes all instances of a given value in the collection. To demonstrate and test this method, write a program that presents the user with a menu having the following options (which can be selected in any order by typing the corresponding number):
+
+Create a new empty collection(any previous values are lost!)
+Read a set of positive values into the collection (use zero to indicate all the values have been entered.)
+Print the collection of values.
+Add a value to the collection of values at a specified location
+Remove the value at a specified location from the collection of values
+Remove all instances of a value within the collection* (see note below).
+Quit the program.
+* note about menu option 6:
+Assume your collection of values contains 3, 5, 4, 5, 2, 7, 5, 2
+Given a value of 5 (using menu option 6) the new method, removeAll , should remove the instances of 5 in the collection so the collection will contain 3, 4, 2, 7, 2.
